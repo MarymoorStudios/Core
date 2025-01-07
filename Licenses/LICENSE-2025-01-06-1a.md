@@ -1,7 +1,7 @@
 ## Marymoor Studios Software License
 **Version**: 2025-01-06  
 **Revision**: 1a  
-[permalink](Licenses/LICENSE-2025-01-06-1a.md)
+[permalink](/Licenses/LICENSE-2025-01-06-1a.md)
 
 ### 1. Introduction
 This Software License (“License”) is a legal agreement between you (either an individual or a single entity) and

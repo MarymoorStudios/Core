@@ -1,0 +1,30 @@
+# User-specific files
+*.user
+
+# Godot 4+ specific ignores
+.godot/
+# export_presets.cfg
+
+# Export / Publish / Release ignores
+[Pp]ublish/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Visual Studio auto-generated files
+# Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Launch Settings
+launchSettings.json

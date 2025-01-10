@@ -1,17 +1,18 @@
 ## Marymoor Studios Software License
 **Version**: 2025-01-06  
 **Revision**: 1a  
-[permalink](/Licenses/LICENSE-2025-01-06-1a.md)
+[permalink](https://github.com/MarymoorStudios/Core/blob/main/LICENSE.md)
 
 ### 1. Introduction
-This Software License (“License”) is a legal agreement between you (either an individual or a single entity) and
-Marymoor Studios LLC, a Washington Limited Liability Company (“Licensor”) for the use of the Marymoor Studios Libraries
-(“Software”).  This License governs your use of the Software provided by the Licensor.  By downloading, installing, or
+This Software License ("License") is a legal agreement between you (either an individual or a single entity) and
+Marymoor Studios LLC, a Washington Limited Liability Company ("Licensor") for the use of the Marymoor Studios Libraries
+("Software").  This License governs your use of the Software provided by the Licensor.  By downloading, installing, or
 using the Software, you agree to be bound by the terms of this License.
 
 ### 2. Contact and Pricing
-Contact Marymoor Studios, LLC at info@marymoorstudios.com for any questions about this License Agreement or to inquire
-about pricing and purchase options.
+Explore license purchase options at the [Marymoor Studios Online Store](https://marymoorstudios.square.site/). Or, 
+contact Marymoor Studios, LLC at info@marymoorstudios.com for any questions about this License Agreement or to inquire
+about additional pricing or purchase options.
 
 ### 3. License Types
 Licensor offers the following two license types.  Your invoice will reflect the type and expiration of the license you
@@ -32,17 +33,17 @@ indicated on your invoice (see below).
 The Software has two roles: as development libraries and as runtime components.  This License applies to both roles.
 
   1. **Development Libraries:**  
-As development libraries (“Libraries”) include all uses during the development and testing of your application(s).
+As development libraries ("Libraries") include all uses during the development and testing of your application(s).
 
   2. **Runtime Components:**  
-As runtime redistributable components (“Runtime”) when shipped in binary form with your application(s) to provide for
+As runtime redistributable components ("Runtime") when shipped in binary form with your application(s) to provide for
 the Software’s functionality within your application(s) at runtime.
 
 ### 5. License Duration
-For Commercial Use licenses, your invoice will reflect the expiration date (“Expiration”) of the license you have
+For Commercial Use licenses, your invoice will reflect the expiration date ("Expiration") of the license you have
 purchased.  This License grants you the rights described herein for the use of the Libraries in the development of your
 application(s) through the Expiration indicated on your invoice.  After the Expiration you will either need to 
-*(1)* purchase a new License (“Renewal”) or *(2)* uninstall and cease use of the Software (including on Build Devices,
+*(1)* purchase a new License ("Renewal") or *(2)* uninstall and cease use of the Software (including on Build Devices,
 see below).
 
 The Expiration does not apply to Runtime components already shipped in released versions of your application(s) at the
@@ -69,8 +70,8 @@ This License does not grant you the right to, and you may not:
 *	Use the Software to create or distribute any malicious software or for any unlawful purpose.
 
 ### 8. Software Versions
-This License grants rights to all versions of the Software released “under a License with the same major License-version
-(including all License-revisions)” as long as that Software version is released on or before the Expiration date as
+This License grants rights to all versions of the Software released "under a License with the same major License-version
+(including all License-revisions)" as long as that Software version is released on or before the Expiration date as
 indicated on your invoice.
 
 Licensor reserves the right to release subsequent versions of the Software under new or different license terms.  Such
@@ -80,7 +81,7 @@ versions of the Software with different license terms will clearly indicate whic
 ### 9. Build Devices
 You may copy and install components from the Software to your build devices, including physical devices and virtual
 machines or containers on those machines, whether on-premises or remote machines that are owned by you, hosted in the
-Cloud for you, or dedicated solely to your use (“Build Devices”).  You and others in your organization may use these
+Cloud for you, or dedicated solely to your use ("Build Devices").  You and others in your organization may use these
 components on your Build Devices solely to compile, build, and verify application(s) developed using the Software, or
 run quality or performance tests of those application(s) as part of the build process.
 

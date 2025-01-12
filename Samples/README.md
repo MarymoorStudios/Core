@@ -34,3 +34,25 @@ proxy references, method pipelining, and Linear Dispatch Order.
 
 The package `MarymoorStudios.Core.Generators` is also required.  Eventual Interface marshalling logic is emitted by
 code-gen.
+
+## PromiseRpcNetworkSample
+A more complex end-to-end sample that demonstrates `MarymoorStudios.Core.Rpc.Net` as well as more advanced features
+of `MarymoorStudios.Core.Rpc` and `MarymoorStudios.Core.Promises` and `MarymoorStudios.Core.Promises.CommandLine`.
+This sample implements both a network client and a network host (as two separate CommandLine commands).
+
+The host exports a full remotable demo object that conforms to the Eventual specification defined in `IDemo.cs`.
+The implementation of this specification in `HostDemoServer.cs` demonstrates both simple `async` and advanced
+`Promise`-based techniques for implementing server-side remotable object methods.  The host continues listening for
+incoming client connections until the user hits Ctrl+C.  Try it:
+
+```
+dotnet run host run --endpoint 127.0.0.1:8888
+```
+
+The client connects to a running host and uses Promises RPC to perform a series of complex interactions with the host
+by calling its `Promise`-based RPC methods.  The client keeps executing random actions until the user hits Ctrl+C.  Try
+it:
+
+```
+dotnet run client run --seed 1 --endpoint 127.0.0.1:8888
+```

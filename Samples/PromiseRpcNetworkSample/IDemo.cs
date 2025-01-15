@@ -45,12 +45,7 @@ internal interface IDemo
   /// otherwise it is returned immediately without waiting locally.
   /// </param>
   /// <returns>A new promise that resolves to the same value as <paramref name="p"/>.</returns>
-  public Promise<int> SendDataPromise(
-    Promise<int> p,
-    Guid tag = default,
-    TimeSpan delay = default,
-    bool shouldWait = true
-  );
+  public Promise<int> SendPromise(Promise<int> p, Guid tag = default, TimeSpan delay = default, bool shouldWait = true);
 
   /// <summary>Sends a proxy argument.</summary>
   /// <param name="p">The proxy to send.</param>

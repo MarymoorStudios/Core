@@ -83,6 +83,17 @@ formalism.
   * Any remotable **proxy**.  Allows methods to pass references to new objects!
   * Any `Sequence<T>`.  Allows bulks transfers, server push, object streaming (with flow control).
   * A `Bytes` Stream.  Allows efficient binary streaming (with flow control).
+  * Support for **generic interfaces**.
+  * Idiomatic C# Syntax:
+    * Method overload support (two methods with the same name, different parameters).
+    * [Nullable Reference Types](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references) and `Nullable<T>`
+      parameter support.
+    * [Optional Argument](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments)
+      tunnelling (`= default_value` attributions are copied to generated proxy and server classes).
+    * Attribute tunneling (attributes are copied to generated proxy and server classes).
+        * Enables use of features like `[MaybeNullWhen]`.
+    * Doc-comment tunneling (doc-comments are copied to generated proxy and server classes).
+        * Provide specs on your interface definitions and read them with Intellisense.
 
 ```cs
 [Eventual]

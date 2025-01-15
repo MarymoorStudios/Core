@@ -72,7 +72,7 @@ internal static partial class PromiseRpcSampleProgram
     /// <summary>Add a value to the register.</summary>
     /// <param name="c">a calculator whose register value to add to this object's register.</param>
     /// <returns>The contents of the register after the operation completes</returns>
-    public Promise<long> AddCalc(CalcProxy c);
+    public Promise<long> Add(CalcProxy c);
 
     /// <summary>Create a new independent calculator whose register is initialized to this object's register.</summary>
     /// <returns>The new object.</returns>
@@ -111,7 +111,7 @@ internal static partial class PromiseRpcSampleProgram
     }
 
     /// <inheritdoc/>
-    public override async Promise<long> AddCalc(CalcProxy c)
+    public override async Promise<long> Add(CalcProxy c)
     {
       long n = await c.Get();
       return await Add(n);

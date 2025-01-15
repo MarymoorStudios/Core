@@ -58,7 +58,7 @@ internal sealed class HostDemoServer : DemoServer
   /// <inheritdoc/>
   public override Promise SendPromise(Promise p, Guid tag = default, TimeSpan delay = default, bool shouldWait = true)
   {
-    Console.WriteLine("SendPromise: Begin {0} {1} {2}", tag, delay, shouldWait);
+    Console.WriteLine("SendPromise: Begin Void {0} {1} {2}", tag, delay, shouldWait);
     Contract.Requires(delay >= TimeSpan.Zero);
 
     // If prompt, then just forward the result without any waiting.
@@ -74,24 +74,24 @@ internal sealed class HostDemoServer : DemoServer
         // ... then either forward or wait.
         if (shouldWait)
         {
-          return p.When(() => { Console.WriteLine("SendPromise: End {0} {1} {2}", tag, delay, shouldWait); });
+          return p.When(() => { Console.WriteLine("SendPromise: End Void {0} {1} {2}", tag, delay, shouldWait); });
         }
 
         // Forward.
-        Console.WriteLine("SendPromise: End {0} {1} {2}", tag, delay, shouldWait);
+        Console.WriteLine("SendPromise: End Void {0} {1} {2}", tag, delay, shouldWait);
         return p;
       });
   }
 
   /// <inheritdoc/>
-  public override Promise<int> SendDataPromise(
+  public override Promise<int> SendPromise(
     Promise<int> p,
     Guid tag = default,
     TimeSpan delay = default,
     bool shouldWait = true
   )
   {
-    Console.WriteLine("SendDataPromise: Begin {0} {1} {2}", tag, delay, shouldWait);
+    Console.WriteLine("SendPromise: Begin Data {0} {1} {2}", tag, delay, shouldWait);
     Contract.Requires(delay >= TimeSpan.Zero);
 
     // If prompt, then just forward the result without any waiting.
@@ -109,13 +109,13 @@ internal sealed class HostDemoServer : DemoServer
         {
           return p.When(x =>
           {
-            Console.WriteLine("SendDataPromise: End {0} {1} {2}", tag, delay, shouldWait);
+            Console.WriteLine("SendPromise: End Data {0} {1} {2}", tag, delay, shouldWait);
             return x;
           });
         }
 
         // Forward.
-        Console.WriteLine("SendDataPromise: End {0} {1} {2}", tag, delay, shouldWait);
+        Console.WriteLine("SendPromise: End Data {0} {1} {2}", tag, delay, shouldWait);
         return p;
       });
   }

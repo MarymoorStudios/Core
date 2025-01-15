@@ -94,7 +94,7 @@ internal sealed class ClientDemo
               TimeSpan delay = TimeSpan.FromMilliseconds(500);
               bool shouldWait = rand.NextBool();
               TimeSpan delay2 = TimeSpan.FromMilliseconds(500);
-              Promise<int> q = remote.SendDataPromise(p, tag, delay, shouldWait);
+              Promise<int> q = remote.SendPromise(p, tag, delay, shouldWait);
               // Delay resolving the argument.
               pending.Link(Scheduler.Delay(delay2).When(() => r.Resolve(42)));
               // Delay waiting on the return value (and verify its value).

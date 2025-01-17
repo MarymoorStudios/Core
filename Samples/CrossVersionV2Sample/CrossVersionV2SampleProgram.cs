@@ -57,7 +57,7 @@ internal sealed class ClientCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:2950";
+      endpoint = "127.0.0.1:8888";
     }
     Console.WriteLine($"Endpoint: {endpoint}");
 
@@ -85,16 +85,16 @@ internal sealed class ClientCmd
             Guid tag = Guid.NewGuid();
             CrossValue input = new("Hello from CrossVersion Client V2!", 42);
             Console.WriteLine($"[{tag}] Input: {input}");
-            CrossValue retval = await c.Capability.CallV1(input, tag);
+            CrossValue retval = await c.Capability.Call(input, tag);
             Console.WriteLine($"[{tag}] Retval: {retval}");
             break;
           }
-          case Cross2Capability c:
+          case ExtraCrossCapability c:
           {
             Guid tag = Guid.NewGuid();
-            CrossValue input = new("Hello from CrossVersion Client V2!", 42);
+            CrossValue input = new("Extra Stuff from CrossVersion Client V2!", 42);
             Console.WriteLine($"[{tag}] Input: {input}");
-            CrossValue retval = await c.Capability.CallV2(input, tag);
+            CrossValue retval = await c.Capability.CallExtra(input, tag);
             Console.WriteLine($"[{tag}] Retval: {retval}");
             break;
           }
@@ -122,7 +122,7 @@ internal sealed class HostCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:2950";
+      endpoint = "127.0.0.1:8888";
     }
     Console.WriteLine($"Endpoint: {endpoint}");
 
@@ -135,8 +135,8 @@ internal sealed class HostCmd
       pool,
       loggerFactory,
       new CapabilityBag([
-        new CrossCapability("ICross", "V1", new CrossProxy(new CrossObject())),
-        new Cross2Capability("ICross2", "V2", new Cross2Proxy(new Cross2Object())),
+        new CrossCapability("ICross", "V2", new CrossProxy(new CrossObject())),
+        new ExtraCrossCapability("IExtraCross", "V2", new ExtraCrossProxy(new ExtraCrossObject())),
       ]).Self);
 
     // Create Listener

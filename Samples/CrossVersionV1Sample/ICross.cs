@@ -10,7 +10,7 @@ namespace CrossVersionSample;
 [Eventual]
 internal partial interface ICross
 {
-  public Promise<CrossValue> CallV1(CrossValue input, Guid tag);
+  public Promise<CrossValue> Call(CrossValue input, Guid tag);
 }
 
 /// <summary>A data contract used in <see cref="ICross"/>.</summary>
@@ -26,7 +26,7 @@ internal sealed record CrossCapability(string Name, string Description, CrossPro
 internal sealed class CrossObject : CrossServer
 {
   /// <inheritdoc/>
-  public override Promise<CrossValue> CallV1(CrossValue input, Guid tag)
+  public override Promise<CrossValue> Call(CrossValue input, Guid tag)
   {
     Console.WriteLine($"[{tag}] Input: {input}");
     CrossValue retval = new("Hello back from CrossObject V1!");

@@ -10,16 +10,14 @@ namespace CrossVersionSample;
 [Eventual]
 internal partial interface ICross
 {
-  public Promise<CrossValue> CallV1(CrossValue input, Guid tag);
+  public Promise<CrossValue> Call(CrossValue input, Guid tag);
 }
 
 /// <summary>A future version of <see cref="ICross"/> with extra methods.</summary>
 [Eventual]
-internal partial interface ICross2
+internal partial interface IExtraCross
 {
-  public Promise<CrossValue> CallV1(CrossValue input, Guid tag);
-
-  public Promise<CrossValue> CallV2(CrossValue input, Guid tag);
+  public Promise<CrossValue> CallExtra(CrossValue input, Guid tag);
 }
 
 /// <summary>A future version of a data contract with extra properties.</summary>
@@ -31,16 +29,16 @@ internal sealed record CrossValue(string Message, int Code);
 internal sealed record CrossCapability(string Name, string Description, CrossProxy Capability)
   : ICapability.Descriptor(Name, Description);
 
-/// <summary>A capability for exporting a <see cref="ICross2"/>.</summary>
+/// <summary>A capability for exporting a <see cref="IExtraCross"/>.</summary>
 [DataContract]
-internal sealed record Cross2Capability(string Name, string Description, Cross2Proxy Capability)
+internal sealed record ExtraCrossCapability(string Name, string Description, ExtraCrossProxy Capability)
   : ICapability.Descriptor(Name, Description);
 
 /// <summary>An implementation of <see cref="ICross"/>.</summary>
 internal sealed class CrossObject : CrossServer
 {
   /// <inheritdoc/>
-  public override Promise<CrossValue> CallV1(CrossValue input, Guid tag)
+  public override Promise<CrossValue> Call(CrossValue input, Guid tag)
   {
     Console.WriteLine($"[{tag}] Input: {input}");
     CrossValue retval = new("Hello back from CrossObject V2!", 42);
@@ -49,23 +47,14 @@ internal sealed class CrossObject : CrossServer
   }
 }
 
-/// <summary>An implementation of <see cref="ICross2"/>.</summary>
-internal sealed class Cross2Object : Cross2Server
+/// <summary>An implementation of <see cref="IExtraCross"/>.</summary>
+internal sealed class ExtraCrossObject : ExtraCrossServer
 {
-  /// <inheritdoc/>
-  public override Promise<CrossValue> CallV1(CrossValue input, Guid tag)
-  {
-    Console.WriteLine($"[{tag}] Input: {input}");
-    CrossValue retval = new("Hello back from Cross2Object V2!", 42);
-    Console.WriteLine($"[{tag}] Retval: {retval}");
-    return Promise.From(retval);
-  }
-
   /// <inheritdoc />
-  public override Promise<CrossValue> CallV2(CrossValue input, Guid tag)
+  public override Promise<CrossValue> CallExtra(CrossValue input, Guid tag)
   {
     Console.WriteLine($"[{tag}] Input: {input}");
-    CrossValue retval = new("Goodbye from Cross2Object V2!", 42);
+    CrossValue retval = new("Here something extra from ExtraCrossObject V2!", 42);
     Console.WriteLine($"[{tag}] Retval: {retval}");
     return Promise.From(retval);
   }

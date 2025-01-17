@@ -57,7 +57,7 @@ internal sealed class ClientCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:2950";
+      endpoint = "127.0.0.1:8888";
     }
     Console.WriteLine($"Endpoint: {endpoint}");
 
@@ -85,7 +85,7 @@ internal sealed class ClientCmd
             Guid tag = Guid.NewGuid();
             CrossValue input = new("Hello from CrossVersion Client V1!");
             Console.WriteLine($"[{tag}] Input: {input}");
-            CrossValue retval = await c.Capability.CallV1(input, tag);
+            CrossValue retval = await c.Capability.Call(input, tag);
             Console.WriteLine($"[{tag}] Retval: {retval}");
             break;
           }
@@ -113,7 +113,7 @@ internal sealed class HostCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:2950";
+      endpoint = "127.0.0.1:8888";
     }
     Console.WriteLine($"Endpoint: {endpoint}");
 

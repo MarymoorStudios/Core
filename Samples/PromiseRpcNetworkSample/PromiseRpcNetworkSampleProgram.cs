@@ -22,7 +22,7 @@ internal static class PromiseRpcNetworkSampleProgram
         options.TimestampFormat = "[yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffff] ";
       }));
 
-    RootCommand rootCommand = new("Promise RPC Stress CLI")
+    RootCommand rootCommand = new("Promise RPC Network Sample")
     {
       new HostDemo().CreateCommandGroup(),
       new ClientDemo().CreateCommandGroup(),

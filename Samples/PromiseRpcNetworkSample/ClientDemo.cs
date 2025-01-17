@@ -15,7 +15,7 @@ internal sealed class ClientDemo
 {
   [Command("Runs a demo client", "run")]
   public static async Promise Run(
-    [Option("The endpoint to listen on", "endpoint")]
+    [Option("The endpoint to connect to", "endpoint")]
     string endpoint,
     [Option("Random seed", "seed")] int seed,
     ILoggerFactory loggerFactory,

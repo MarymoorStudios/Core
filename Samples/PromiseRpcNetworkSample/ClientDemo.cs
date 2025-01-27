@@ -24,9 +24,14 @@ internal sealed class ClientDemo
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:0";
+      endpoint = "127.0.0.1";
     }
-    Console.WriteLine($"Endpoint: {endpoint}");
+    if (!TcpFactoryConfig.TryParseEndpoint(endpoint, out IPEndPoint? ipe))
+    {
+      await Console.Error.WriteLineAsync($"Invalid endpoint: {endpoint}");
+      return;
+    }
+    Console.WriteLine($"Endpoint: {ipe}");
 
     Promise pendingResult;
     using (Joiner pending = Joiner.Create(out pendingResult))
@@ -40,7 +45,6 @@ internal sealed class ClientDemo
       await using TcpFactory<DemoServer> factory = new(tcpConfig, pool, loggerFactory, root);
 
       // Connect to the host.
-      IPEndPoint ipe = IPEndPoint.Parse(endpoint);
       DemoProxy remote = factory.Connect<DemoProxy, DemoServer>(ipe, cancel);
       Console.WriteLine($"Connecting: {ipe}");
       Guid remoteId = await remote.GetId();

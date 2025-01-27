@@ -19,9 +19,14 @@ internal sealed class HostDemo
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:0";
+      endpoint = "127.0.0.1";
     }
-    Console.WriteLine($"Endpoint: {endpoint}");
+    if (!TcpFactoryConfig.TryParseEndpoint(endpoint, out IPEndPoint? ipe))
+    {
+      await Console.Error.WriteLineAsync($"Invalid endpoint: {endpoint}");
+      return;
+    }
+    Console.WriteLine($"Endpoint: {ipe}");
 
     // Create TCP Scope.
     const int tcpMaxMessageSize = 100 * 1024;
@@ -32,7 +37,6 @@ internal sealed class HostDemo
     await using TcpFactory<DemoServer> factory = new(tcpConfig, pool, loggerFactory, root);
 
     // Create Listener
-    IPEndPoint ipe = IPEndPoint.Parse(endpoint);
     await using TcpListener listener = await factory.Listen(ipe);
 
     // Run until cancelled.

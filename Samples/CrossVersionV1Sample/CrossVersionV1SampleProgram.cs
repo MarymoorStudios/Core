@@ -57,9 +57,14 @@ internal sealed class ClientCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:8888";
+      endpoint = "127.0.0.1";
     }
-    Console.WriteLine($"Endpoint: {endpoint}");
+    if (!TcpFactoryConfig.TryParseEndpoint(endpoint, out IPEndPoint? ipe))
+    {
+      await Console.Error.WriteLineAsync($"Invalid endpoint: {endpoint}");
+      return;
+    }
+    Console.WriteLine($"Endpoint: {ipe}");
 
     // Create TCP Scope.
     const int tcpMaxMessageSize = 100 * 1024;
@@ -70,7 +75,6 @@ internal sealed class ClientCmd
     await using TcpFactory<NothingServer> factory = new(tcpConfig, pool, loggerFactory, clientRoot);
 
     // Connect to the host.
-    IPEndPoint ipe = IPEndPoint.Parse(endpoint);
     CapabilityProxy remote = factory.Connect<CapabilityProxy, CapabilityServer>(ipe, cancel);
     Console.WriteLine($"Connecting: {ipe}");
 
@@ -113,9 +117,14 @@ internal sealed class HostCmd
   {
     if (string.IsNullOrWhiteSpace(endpoint))
     {
-      endpoint = "127.0.0.1:8888";
+      endpoint = "127.0.0.1";
     }
-    Console.WriteLine($"Endpoint: {endpoint}");
+    if (!TcpFactoryConfig.TryParseEndpoint(endpoint, out IPEndPoint? ipe))
+    {
+      await Console.Error.WriteLineAsync($"Invalid endpoint: {endpoint}");
+      return;
+    }
+    Console.WriteLine($"Endpoint: {ipe}");
 
     // Create TCP Scope.
     const int tcpMaxMessageSize = 100 * 1024;
@@ -128,7 +137,6 @@ internal sealed class HostCmd
       new CapabilityBag([new CrossCapability("ICross", "V1", new CrossProxy(new CrossObject()))]).Self);
 
     // Create Listener
-    IPEndPoint ipe = IPEndPoint.Parse(endpoint);
     await using TcpListener listener = await factory.Listen(ipe);
 
     // Run until cancelled.

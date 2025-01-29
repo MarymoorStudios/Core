@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MarymoorStudios.Core.Promises" Version="1.0.0.9-preview" />
+    <PackageReference Include="MarymoorStudios.Core.Promises" Version="1.0.0.10-preview" />
   </ItemGroup>
 
 </Project>

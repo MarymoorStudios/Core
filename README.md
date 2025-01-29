@@ -1,11 +1,11 @@
-# ![Logo](Images/Marymoor%20Studios%20Logo%20NM%2064x64.png) Marymoor Studios Core Libraries 
+# ![Logo][logo] Marymoor Studios Core Libraries 
 
 The Marymoor Studios Core Libraries are a set of tools for developing concurrent and distributed applications.
 
 ## Contact and Pricing
-Explore license purchase options at the [Marymoor Studios Online Store](https://marymoorstudios.square.site/). Or, 
-contact Marymoor Studios, LLC at info@marymoorstudios.com to inquire about additional license pricing and purchase
-options.  Both **free** non-commercial use licenses, and paid commercial licenses are available.
+Explore license purchase options at the [Marymoor Studios Online Store][store]. Or, contact Marymoor Studios, LLC at 
+info@marymoorstudios.com to inquire about additional license pricing and purchase options.  Both **free** non-commercial
+use licenses, and paid commercial licenses are available.
 
 ## The Core Libraries
 The Core Libraries are a suite of C# tools offering a unique, easy to use, correct-by-construction, approach to
@@ -86,10 +86,9 @@ formalism.
   * Support for **generic interfaces**.
   * Idiomatic C# Syntax:
     * Method overload support (two methods with the same name, different parameters).
-    * [Nullable Reference Types](https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references) and `Nullable<T>`
-      parameter support.
-    * [Optional Argument](https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments)
-      tunnelling (`= default_value` attributions are copied to generated proxy and server classes).
+    * [Nullable Reference Types][nullable-references] and `Nullable<T>` parameter support.
+    * [Optional Argument][optional-arguments] tunnelling (`= default_value` attributions are copied to generated proxy 
+      and server classes).
     * Attribute tunneling (attributes are copied to generated proxy and server classes).
         * Enables use of features like `[MaybeNullWhen]`.
     * Doc-comment tunneling (doc-comments are copied to generated proxy and server classes).
@@ -144,3 +143,8 @@ public partial interface IJoinedPlayer
 ## Links
 * [Documentation](https://github.com/MarymoorStudios/Core)
 * [License](https://github.com/MarymoorStudios/Core/blob/main/LICENSE.md)
+
+[logo]: https://raw.githubusercontent.com/MarymoorStudios/Core/main/Images/Marymoor%20Studios%20Logo%20NM%2064x64.png
+[store]: https://marymoorstudios.square.site/
+[nullable-references]: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
+[optional-arguments]: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments

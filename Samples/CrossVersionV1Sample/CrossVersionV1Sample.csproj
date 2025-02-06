@@ -8,15 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MarymoorStudios.Core.Generators" Version="1.0.0.11-preview">
+    <PackageReference Include="MarymoorStudios.Core.Generators">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MarymoorStudios.Core.Promises.CommandLine" Version="1.0.0.11-preview" />
-    <PackageReference Include="MarymoorStudios.Core.Rpc.Net" Version="1.0.0.11-preview" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.EventSource" Version="9.0.0" />
+    <PackageReference Include="MarymoorStudios.Core.Promises.CommandLine"/>
+    <PackageReference Include="MarymoorStudios.Core.Rpc.Net"/>
+    <PackageReference Include="Microsoft.Extensions.Logging"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.EventSource"/>
   </ItemGroup>
 
 </Project>

@@ -75,16 +75,16 @@ internal sealed class ClientCmd
     await using TcpFactory<NothingServer> factory = new(tcpConfig, pool, loggerFactory, clientRoot);
 
     // Connect to the host.
-    CapabilityProxy remote = factory.Connect<CapabilityProxy, CapabilityServer>(ipe, cancel);
+    MetadataProxy remote = factory.Connect<MetadataProxy, MetadataServer>(ipe, cancel);
     Console.WriteLine($"Connecting: {ipe}");
 
     try
     {
-      foreach (ICapability.Descriptor cap in await remote.GetCapabilities())
+      foreach (IMetadata.Descriptor cap in await remote.GetCapabilities())
       {
         switch (cap)
         {
-          case CrossCapability c:
+          case CrossDescriptor c:
           {
             Guid tag = Guid.NewGuid();
             CrossValue input = new("Hello from CrossVersion Client V2!", 42);
@@ -93,7 +93,7 @@ internal sealed class ClientCmd
             Console.WriteLine($"[{tag}] Retval: {retval}");
             break;
           }
-          case ExtraCrossCapability c:
+          case ExtraCrossDescriptor c:
           {
             Guid tag = Guid.NewGuid();
             CrossValue input = new("Extra Stuff from CrossVersion Client V2!", 42);
@@ -140,12 +140,12 @@ internal sealed class HostCmd
     const int tcpChunksPerSlab = 1000;
     TcpFactoryConfig tcpConfig = new();
     using MemoryPool<byte> pool = new SlabMemoryPool<byte>(tcpMaxMessageSize, tcpChunksPerSlab);
-    await using TcpFactory<CapabilityServer> factory = new(tcpConfig,
+    await using TcpFactory<MetadataServer> factory = new(tcpConfig,
       pool,
       loggerFactory,
-      new CapabilityBag([
-        new CrossCapability("ICross", "V2", new CrossProxy(new CrossObject())),
-        new ExtraCrossCapability("IExtraCross", "V2", new ExtraCrossProxy(new ExtraCrossObject())),
+      new MetadataPublisher([
+        new CrossDescriptor("ICross", "V2", new CrossProxy(new CrossObject())),
+        new ExtraCrossDescriptor("IExtraCross", "V2", new ExtraCrossProxy(new ExtraCrossObject())),
       ]).Self);
 
     // Create Listener

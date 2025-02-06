@@ -75,16 +75,16 @@ internal sealed class ClientCmd
     await using TcpFactory<NothingServer> factory = new(tcpConfig, pool, loggerFactory, clientRoot);
 
     // Connect to the host.
-    CapabilityProxy remote = factory.Connect<CapabilityProxy, CapabilityServer>(ipe, cancel);
+    MetadataProxy remote = factory.Connect<MetadataProxy, MetadataServer>(ipe, cancel);
     Console.WriteLine($"Connecting: {ipe}");
 
     try
     {
-      foreach (ICapability.Descriptor cap in await remote.GetCapabilities())
+      foreach (IMetadata.Descriptor cap in await remote.GetCapabilities())
       {
         switch (cap)
         {
-          case CrossCapability c:
+          case CrossDescriptor c:
           {
             Guid tag = Guid.NewGuid();
             CrossValue input = new("Hello from CrossVersion Client V1!");
@@ -131,10 +131,10 @@ internal sealed class HostCmd
     const int tcpChunksPerSlab = 1000;
     TcpFactoryConfig tcpConfig = new();
     using MemoryPool<byte> pool = new SlabMemoryPool<byte>(tcpMaxMessageSize, tcpChunksPerSlab);
-    await using TcpFactory<CapabilityServer> factory = new(tcpConfig,
+    await using TcpFactory<MetadataServer> factory = new(tcpConfig,
       pool,
       loggerFactory,
-      new CapabilityBag([new CrossCapability("ICross", "V1", new CrossProxy(new CrossObject()))]).Self);
+      new MetadataPublisher([new CrossDescriptor("ICross", "V1", new CrossProxy(new CrossObject()))]).Self);
 
     // Create Listener
     await using TcpListener listener = await factory.Listen(ipe);

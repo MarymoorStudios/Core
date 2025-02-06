@@ -68,8 +68,8 @@ takes and returns a custom data contract called `CrossValue`.  Both the client a
 entire data contract value they receive.  
 
 V1 also demonstrates how to utilize the builtin Eventual Interface `ICapabilities` through the RPC library classes 
-`CapabilityBag` and `ICapability.Descriptor` to define and publish extensible service metadata.  The V1 service
-publishes the custom metadata item `CrossCapability` which contains a proxy for an `ICross` object.
+`MetadataPublisher` and `IMetadata.Descriptor` to define and publish extensible service metadata.  The V1 service
+publishes the custom metadata item `CrossDescriptor` which contains a proxy for an `ICross` object.
 
 Try out the server:
 
@@ -89,7 +89,7 @@ compatible ways:
 
 1. It extends the `CrossValue` data contract to take an additional property value (`CrossValue.Code`).
 2. It defines, implements, and exports a second Eventual Interface called `IExtraCross` with a new method `CallExtra`.
-3. It exports additional metadata about this second interface via the custom metdata item `ExtraCrossCapability`.
+3. It exports additional metadata about this second interface via the custom metdata item `ExtraCrossDescriptor`.
 
 The V2 client, like the V1 client, reads metadata from the service it connects to.  When connected to a V1 server, the
 client ONLY does what the V1 client did (i.e. it calls `ICross.Call`), but in doing so it _also_ passes an evolved 
@@ -101,7 +101,7 @@ and V2 servers.
 When connecting to the V2 server, the V2 client will see the additional metadata for the `IExtraCross` interface and
 will then dynamically **also** make a call to the `CallExtra` method.  This call is *only* made by a V2/V2 pairing. The
 V1 client can still connect normally with the V2 server, but it will not call `CallExtra` because it doesn't know the
-`ExtraCrossCapability` custom metadata item.  The V2 server is compatible with both the V1 and V2 clients.
+`ExtraCrossDescriptor` custom metadata item.  The V2 server is compatible with both the V1 and V2 clients.
 
 ### Additive Evolution
 In _additive evolution_ you can evolve an existing service in-place in a backward compatible way.  Here are some DOs and 
@@ -112,7 +112,7 @@ DON'Ts to ensure backward compatibility:
 2. Make the type of an existing field nullable (that wasn't previously nullable).
 3. Add new methods to existing Eventual Interfaces.
 4. Add new Eventual Interfaces.
-5. Add and publish new custom metadata items (by extending `ICapability.Descriptor`).
+5. Add and publish new custom metadata items (by extending `IMetadata.Descriptor`).
 
 #### DON'T:
 1. Add new fields in the middle of existing data contract types.  **DC serialization is strongly ordered.**

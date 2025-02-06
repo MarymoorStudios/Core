@@ -26,13 +26,13 @@ internal sealed record CrossValue(string Message, int Code);
 
 /// <summary>A capability for exporting a <see cref="ICross"/>.</summary>
 [DataContract]
-internal sealed record CrossCapability(string Name, string Description, CrossProxy Capability)
-  : ICapability.Descriptor(Name, Description);
+internal sealed record CrossDescriptor(string Name, string Description, CrossProxy Capability)
+  : IMetadata.Descriptor(Name, Description);
 
 /// <summary>A capability for exporting a <see cref="IExtraCross"/>.</summary>
 [DataContract]
-internal sealed record ExtraCrossCapability(string Name, string Description, ExtraCrossProxy Capability)
-  : ICapability.Descriptor(Name, Description);
+internal sealed record ExtraCrossDescriptor(string Name, string Description, ExtraCrossProxy Capability)
+  : IMetadata.Descriptor(Name, Description);
 
 /// <summary>An implementation of <see cref="ICross"/>.</summary>
 internal sealed class CrossObject : CrossServer

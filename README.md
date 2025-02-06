@@ -140,11 +140,15 @@ public partial interface IJoinedPlayer
 * Dynamic real-time code-gen as you type.
 * Best-practice analyzers and diagnostics.
 
+## Support
+* [Join][discord] our Discord support channel.
+
 ## Links
 * [Documentation](https://github.com/MarymoorStudios/Core)
 * [License](https://github.com/MarymoorStudios/Core/blob/main/LICENSE.md)
 
 [logo]: https://raw.githubusercontent.com/MarymoorStudios/Core/main/Images/Marymoor%20Studios%20Logo%20NM%2064x64.png
 [store]: https://marymoorstudios.square.site/
+[discord]: https://discord.gg/86fYrwUt
 [nullable-references]: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 [optional-arguments]: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments

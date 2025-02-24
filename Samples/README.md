@@ -40,22 +40,60 @@ A more complex end-to-end sample that demonstrates `MarymoorStudios.Core.Rpc.Net
 of `MarymoorStudios.Core.Rpc` and `MarymoorStudios.Core.Promises` and `MarymoorStudios.Core.Promises.CommandLine`.
 This sample implements both a network client and a network host (as two separate CommandLine commands).
 
-The host exports a full remotable demo object that conforms to the Eventual specification defined in `IDemo.cs`.
-The implementation of this specification in `HostDemoServer.cs` demonstrates both simple `async` and advanced
-`Promise`-based techniques for implementing server-side remotable object methods.  The host continues listening for
-incoming client connections until the user hits Ctrl+C.  Try it:
+1. The host exports a full remotable demo object that conforms to the Eventual specification defined in `IDemo.cs`.
+   The implementation of this specification in `HostDemoServer.cs` demonstrates both simple `async` and advanced
+   `Promise`-based techniques for implementing server-side remotable object methods.  The host continues listening for
+   incoming client connections until the user hits Ctrl+C.  Try it:
+   
+   ```
+   dotnet run host run --endpoint 127.0.0.1:8888
+   ```
 
-```
-dotnet run host run --endpoint 127.0.0.1:8888
-```
+2. The client connects to a running host and uses Promises RPC to perform a series of complex interactions with the host
+   by calling its `Promise`-based RPC methods.  The client keeps executing random actions until the user hits Ctrl+C.  
+   Try it:
+   
+   ```
+   dotnet run client run --seed 1 --endpoint 127.0.0.1:8888
+   ```
 
-The client connects to a running host and uses Promises RPC to perform a series of complex interactions with the host
-by calling its `Promise`-based RPC methods.  The client keeps executing random actions until the user hits Ctrl+C.  Try
-it:
+## PromiseRpcIdentitySample
+Extends the `PromiseRpcNetworkSample` to include identity through Marymoor Authentication.
 
-```
-dotnet run client run --seed 1 --endpoint 127.0.0.1:8888
-```
+1. The host can be run with one identity, while the client runs with a different identity.  If either identity doesn't
+   exist it is automatically created.  Try it:
+   
+   ```
+   dotnet run --identity alice@test.marymoorstudios.com host run --endpoint 127.0.0.1:8888
+   ```
+   
+2. The client connects and displays the identities reported by both parties:
+   
+   ```
+   dotnet run --identity bob@test.marymoorstudios.com client run --endpoint 127.0.0.1:8888
+   ```
+
+3. You can management identities using the MarymoorStudios CLI tool.  First install this tool:
+
+   ```
+   dotnet tool install --global --prerelease MarymoorStudios.Core.Cli
+   ```
+
+4. Run the tool's `identity` command group to manage existing ids.  For example listing the ids created in the steps
+   above with:
+
+   ```
+   msc identity list
+   ```
+   
+   produces this sample output:
+   
+   ```shell
+   > msc identity list
+   alice@test.marymoorstudios.com (alice@test.marymoorstudios.com)
+   bob@test.marymoorstudios.com (bob@test.marymoorstudios.com)
+   ```
+
 
 ## CrossVersionV1Sample / CrossVersionV2Sample
 These two samples extend [PromiseRpcNetworkSample](#promiserpcnetworksample).  The two samples work together to
@@ -71,25 +109,25 @@ V1 also demonstrates how to utilize the builtin Eventual Interface `ICapabilitie
 `MetadataPublisher` and `IMetadata.Descriptor` to define and publish extensible service metadata.  The V1 service
 publishes the custom metadata item `CrossDescriptor` which contains a proxy for an `ICross` object.
 
-Try out the server:
+1. Try out the server:
+   
+   ```
+   dotnet run host run --endpoint 127.0.0.1:8888
+   ```
 
-```
-dotnet run host run --endpoint 127.0.0.1:8888
-```
-
-And then connect with the client:
-
-```
-dotnet run client run --endpoint 127.0.0.1:8888
-```
+2. And then connect with the client:
+   
+   ```
+   dotnet run client run --endpoint 127.0.0.1:8888
+   ```
 
 ### V2 Service - Evolving a Service
 The V2 version of this sample evolves the service described above using _additive evolution_ in THREE backward
 compatible ways:
 
-1. It extends the `CrossValue` data contract to take an additional property value (`CrossValue.Code`).
-2. It defines, implements, and exports a second Eventual Interface called `IExtraCross` with a new method `CallExtra`.
-3. It exports additional metadata about this second interface via the custom metdata item `ExtraCrossDescriptor`.
+* It extends the `CrossValue` data contract to take an additional property value (`CrossValue.Code`).
+* It defines, implements, and exports a second Eventual Interface called `IExtraCross` with a new method `CallExtra`.
+* It exports additional metadata about this second interface via the custom metdata item `ExtraCrossDescriptor`.
 
 The V2 client, like the V1 client, reads metadata from the service it connects to.  When connected to a V1 server, the
 client ONLY does what the V1 client did (i.e. it calls `ICross.Call`), but in doing so it _also_ passes an evolved 
@@ -108,20 +146,20 @@ In _additive evolution_ you can evolve an existing service in-place in a backwar
 DON'Ts to ensure backward compatibility:
 
 #### DOs:
-1. Add new fields *at the end* of existing data contract types.
-2. Make the type of an existing field nullable (that wasn't previously nullable).
-3. Add new methods to existing Eventual Interfaces.
-4. Add new Eventual Interfaces.
-5. Add and publish new custom metadata items (by extending `IMetadata.Descriptor`).
+* Add new fields *at the end* of existing data contract types.
+* Make the type of an existing field nullable (that wasn't previously nullable).
+* Add new methods to existing Eventual Interfaces.
+* Add new Eventual Interfaces.
+* Add and publish new custom metadata items (by extending `IMetadata.Descriptor`).
 
 #### DON'T:
-1. Add new fields in the middle of existing data contract types.  **DC serialization is strongly ordered.**
+* Add new fields in the middle of existing data contract types.  **DC serialization is strongly ordered.**
     1. Instead add new fields _at the end_.
-2. Change the physical type of an existing field.  **DC serialization is strongly typed.**
+* Change the physical type of an existing field.  **DC serialization is strongly typed.**
     1. Instead add new fields _at the end_ (and consider making obsolete fields nullable, if they aren't already).
-3. Delete existing fields or change their order.
+* Delete existing fields or change their order.
     1. Instead consider making obsolete fields nullable, if they aren't already.
-4. Delete existing methods or change their parameters.  
+* Delete existing methods or change their parameters.  
     1. Interface methods are **unique based on their name + parameter types and order**.
     2. Altering their parameters' types or their order _creates a new method_.
     3. Deleting a method will make it inaccessible to older clients still using it.

@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossVersionV1Sample", "Cro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrossVersionV2Sample", "CrossVersionV2Sample\CrossVersionV2Sample.csproj", "{BEC4A219-69D7-43DB-9977-5A78733B575C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromiseRpcIdentitySample", "PromiseRpcIdentitySample\PromiseRpcIdentitySample.csproj", "{4F64913C-6D7D-7AFE-FD2F-1DAA31336FB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -56,6 +58,10 @@ Global
 		{BEC4A219-69D7-43DB-9977-5A78733B575C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC4A219-69D7-43DB-9977-5A78733B575C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC4A219-69D7-43DB-9977-5A78733B575C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F64913C-6D7D-7AFE-FD2F-1DAA31336FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F64913C-6D7D-7AFE-FD2F-1DAA31336FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F64913C-6D7D-7AFE-FD2F-1DAA31336FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F64913C-6D7D-7AFE-FD2F-1DAA31336FB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

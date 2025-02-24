@@ -76,7 +76,9 @@ formalism.
 ### Formal Eventual Interface Specifications:
 * Remotable stateful objects accessed remotely by reference (via dynamically created **proxy**).
 * Automatic lifetime management between Sips (x-thread, x-process, x-machine).
-* Capability-based security model.
+* TLS encrypted or unsecured sockets.
+* Certificate-based Authentication model.
+* Capability-based Authorization model.
 * Method specifications formalize wire contracts (i.e. explicit application protocols).
 * **Flexible Modelling**: Methods can pass or return:
   * Any **data contract** including both primitives and UDTs.

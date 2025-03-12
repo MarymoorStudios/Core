@@ -83,7 +83,7 @@ formalism.
 * **Flexible Modelling**: Methods can pass or return:
   * Any **data contract** including both primitives and UDTs.
   * Any remotable **proxy**.  Allows methods to pass references to new objects!
-  * Any `Sequence<T>`.  Allows bulks transfers, server push, object streaming (with flow control).
+  * Any `Sequence<T>`.  Allows bulk transfers, server push, object streaming (with flow control).
   * A `Bytes` Stream.  Allows efficient binary streaming (with flow control).
   * Support for **generic interfaces**.
   * Idiomatic C# Syntax:

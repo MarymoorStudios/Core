@@ -25,87 +25,89 @@ additional license pricing and purchase options.
 To use TraceCLI to monitor applications, they must emit their logs using an `ILogger` from the 
 [Microsoft.Extensions.Logging][LoggingDocs] framework and attach an EventSource provider.
 
-1. First add the required packages to your application (if they aren't added already):
+1. First add the required packages to your application (if they aren't added already)
 
-```sh
-dotnet add package Microsoft.Extensions.Logging
-dotnet add package Microsoft.Extensions.Logging.EventSource
-```
+    ```sh
+    dotnet add package Microsoft.Extensions.Logging
+    dotnet add package Microsoft.Extensions.Logging.EventSource
+    ```
 
 2. Add Logging
-The most efficient mechanism for logging using an `ILogger` is to use 
-[compile-time logging source generation][compile-time-logging] which leverages Rosyln code generation to generated
-strongly typed methods for each logging event.  The generated code handles all of the details necessary to avoid
-unnecessary copying and string allocation when logging is turned off.  A simple logger might look like:
 
-```cs
-  private sealed partial class Logger
-  {
-    private readonly ILogger<Logger> m_logger;
+    The most efficient mechanism for logging using an `ILogger` is to use 
+    [compile-time logging source generation][compile-time-logging] which leverages Rosyln code generation to generated
+    strongly typed methods for each logging event.  The generated code handles all of the details necessary to avoid
+    unnecessary copying and string allocation when logging is turned off.  A simple logger might look like:
 
-    public Logger(ILoggerFactory factory)
-    {
-      m_logger = factory.CreateLogger<Logger>();
-      Contract.Unused(m_logger);
-    }
+    ```cs
+      private sealed partial class Logger
+      {
+        private readonly ILogger<Logger> m_logger;
 
-    [LoggerMessage(EventId = 1, Message = "{msg}")]
-    public partial void Test(LogLevel level, string msg, Exception? ex = default);
-  }
-```
+        public Logger(ILoggerFactory factory)
+        {
+          m_logger = factory.CreateLogger<Logger>();
+          Contract.Unused(m_logger);
+        }
 
-The logging can then be instantiated with a `ILoggingFactory` and used to emit logs.  For example:
+        [LoggerMessage(EventId = 1, Message = "{msg}")]
+        public partial void Test(LogLevel level, string msg, Exception? ex = default);
+      }
+    ```
 
-```cs
-    using ILoggerFactory loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
-     .SetMinimumLevel(LogLevel.Debug)
-     .AddEventSourceLogger();
+    The logging can then be instantiated with a `ILoggingFactory` and used to emit logs.  For example:
 
-    Logger logger = new(loggerFactory);
-    logger.Test(LogLevel.Debug, "Debug message");
-    logger.Test(LogLevel.Information, "Info message");
-    logger.Test(LogLevel.Warning, "Warning message");
-    try
-    {
-      throw new AbortedException("Some error string");
-    }
-    catch (AbortedException ex)
-    {
-      logger.Test(LogLevel.Error, "Error message", ex);
-    }
-    logger.Test(LogLevel.Critical, "Critical message");
-```
+    ```cs
+        using ILoggerFactory loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+         .SetMinimumLevel(LogLevel.Debug)
+         .AddEventSourceLogger();
+
+        Logger logger = new(loggerFactory);
+        logger.Test(LogLevel.Debug, "Debug message");
+        logger.Test(LogLevel.Information, "Info message");
+        logger.Test(LogLevel.Warning, "Warning message");
+        try
+        {
+          throw new AbortedException("Some error string");
+        }
+        catch (AbortedException ex)
+        {
+          logger.Test(LogLevel.Error, "Error message", ex);
+        }
+        logger.Test(LogLevel.Critical, "Critical message");
+    ```
 
 3. Install TraceCLI as a tool:
 
-```sh
-dotnet tool install --global --prerelease MarymoorStudios.Core.Rpc.TraceCli
-```
+    ```sh
+    dotnet tool install --global --prerelease MarymoorStudios.Core.Rpc.TraceCli
+    ```
 
 4. Invoke the tool:
 
-```
-tracecli live cli
-```
+    ```
+    tracecli live cli
+    ```
 
-When you launch TraceCLI it will require you to elevate to admin privileges.  This is required because TraceCLI will be
-able to monitor logging stream from **any application** running on the computer where it is executed.  Only an admin
-should have the power to do this.  
+    When you launch TraceCLI it will require you to elevate to admin privileges.  This is required because TraceCLI will
+    be able to monitor logging stream from **any application** running on the computer where it is executed.  Only an
+    admin should have the power to do this.  
 
-After accepting the elevation prompt, the CLI window will open in _display mode_.  Hit the any key in the CLI window
-to access the TraceCLI interactive shell.  From the shell you can interactively change the filtering settings.  Logging
-display will be paused while the _interactive shell mode_ is active.  When you are ready to return to _display mode_
-simple hit `enter` (an empty command line in the shell) and monitoring will resume.  (Events that were sent while
-monitoring was paused will be buffered in memory and displayed upon resume.  To avoid large memory consumption, never
-leave TraceCLI in _interactive shell mode_ for extended periods.)
+    After accepting the elevation prompt, the CLI window will open in _display mode_.  Hit any key in the CLI window
+    to access the TraceCLI interactive shell.  From the shell you can interactively change the filtering settings.
+    Logging display will be paused while the _interactive shell mode_ is active.  When you are ready to return to
+    _display mode_ simple hit `enter` (an empty command line in the shell) and monitoring will resume.  (Events that
+    were sent while monitoring was paused will be buffered in memory and displayed upon resume.  To avoid large memory
+    consumption, never leave TraceCLI in _interactive shell mode_ for extended periods.)
 
 5. Run your application.
-Logging produced by your application will appear in the TraceCLI window (sometimes with a slight delay of a few seconds
-due to EventSource internal buffering).
 
-Use the _interactive shell mode_ (or command line switches) to set filters to restrict the view to only the applications
-you are interested in monitoring.  Multiple applications can be monitored at the same time.  Use the _Column Filter_
-(cf) to control which columns to display in the output.
+    Logging produced by your application will appear in the TraceCLI window (sometimes with a slight delay of a few
+    seconds due to EventSource internal buffering).
+
+    Use the _interactive shell mode_ (or command line switches) to set filters to restrict the view to only the
+    applications you are interested in monitoring.  Multiple applications can be monitored at the same time.  Use the
+    _Column Filter_ (cf) to control which columns to display in the output.
 
 ## Links
 * [Documentation](https://github.com/MarymoorStudios/Core)

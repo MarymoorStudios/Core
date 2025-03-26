@@ -143,7 +143,7 @@ public partial interface IJoinedPlayer
 * Best-practice analyzers and diagnostics.
 
 ## Support
-* [Join][discord] our Discord support channel.
+* [Join][discord] our Discord [support channel][discord-channel].
 
 ## Links
 * [Documentation](https://github.com/MarymoorStudios/Core)
@@ -151,6 +151,7 @@ public partial interface IJoinedPlayer
 
 [logo]: https://raw.githubusercontent.com/MarymoorStudios/Core/main/Images/Marymoor%20Studios%20Logo%20NM%2064x64.png
 [store]: https://marymoorstudios.square.site/
-[discord]: https://discord.gg/86fYrwUt
+[discord]: https://discord.gg/pKWXT9mSJb
+[discord-channel]: https://discord.com/channels/1328497141114470461/1328497141731037287
 [nullable-references]: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 [optional-arguments]: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments

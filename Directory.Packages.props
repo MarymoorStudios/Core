@@ -3,15 +3,15 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="MarymoorStudios.Core" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Generators" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Promises" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Promises.CommandLine" Version="1.0.0.16-preview" />
-    <PackageVersion Include="MarymoorStudios.Core.Promises.IO" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Rpc" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Rpc.Identity" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Rpc.Net" Version="1.0.0.16" />
-    <PackageVersion Include="MarymoorStudios.Core.Serialization" Version="1.0.0.16" />
+    <PackageVersion Include="MarymoorStudios.Core" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Generators" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Promises" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Promises.CommandLine" Version="1.0.0.17-preview" />
+    <PackageVersion Include="MarymoorStudios.Core.Promises.IO" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Rpc" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Rpc.Identity" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Rpc.Net" Version="1.0.0.17" />
+    <PackageVersion Include="MarymoorStudios.Core.Serialization" Version="1.0.0.17" />
     <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
     <PackageVersion Include="Microsoft.Extensions.Logging.EventSource" Version="9.0.3" />

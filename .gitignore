@@ -28,3 +28,6 @@
 
 # Launch Settings
 launchSettings.json
+
+# Don't publish AppId test files.
+steam_appid.txt

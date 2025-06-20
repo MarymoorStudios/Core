@@ -57,6 +57,34 @@ This sample implements both a network client and a network host (as two separate
    dotnet run client run --seed 1 --endpoint 127.0.0.1:8888
    ```
 
+## SteamRpcNetworkSample
+A alternative version of `PromiseRpcNetworkSample` which utilizes Steam Networking from
+`MarymoorStudios.Core.Steamworks.Rpc` instead of TCP.
+
+1. Like the previous example, the host exports a full remotable demo object that conforms to the Eventual specification
+   defined in `IDemo.cs`.  Unlike the previous example, this host connects to Steam as an anonymous Game Server (you
+   MUST provide a `stream_appid.txt` file in the project directory).  The host prints the anonymous `SteamId` allocated
+   by Steam Networking to the console during startup.  The host will continue to listen on Steam for incoming client
+   connections until the user hits Ctrl+C.  Try it:
+   
+   ```
+   dotnet run host run
+   ```
+
+2. The client connects to a running host by providing the `SteamId` that the host printed to the screen during start up.
+   The client also connects to Steam but as the current logged in Steam user (you MUST have Steam Client installed and
+   be logged in before launching the client).  Like the previous example, the client uses Promises RPC to perform a
+   series of complex interactions with the host by calling its `Promise`-based RPC methods.  The client keeps executing
+   random actions until the user hits Ctrl+C.  Try it:
+   
+   ```
+   dotnet run client run --seed 1 <host steamid>
+   ```
+
+You'll note that despite using Steam Networking for both discovery, connecting, and network routing, the functionality
+across Eventual Interfaces work identically to the TCP version above.  This allows you to focus on your game interface
+design and not worry about which networking stack is in use.
+
 ## PromiseRpcIdentitySample
 Extends the `PromiseRpcNetworkSample` to include identity through Marymoor Authentication.
 

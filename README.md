@@ -146,8 +146,9 @@ public partial interface IJoinedPlayer
 * [Join][discord] our Discord [support channel][discord-channel].
 
 ## Links
-* [Documentation](https://github.com/MarymoorStudios/Core)
-* [License](https://github.com/MarymoorStudios/Core/blob/main/LICENSE.md)
+* [API Documentation][docfx-core]
+* [Samples][github-core]
+* [License][license]
 
 [logo]: https://raw.githubusercontent.com/MarymoorStudios/Core/main/Images/Marymoor%20Studios%20Logo%20NM%2064x64.png
 [store]: https://marymoorstudios.square.site/
@@ -155,3 +156,6 @@ public partial interface IJoinedPlayer
 [discord-channel]: https://discord.com/channels/1328497141114470461/1328497141731037287
 [nullable-references]: https://learn.microsoft.com/en-us/dotnet/csharp/nullable-references
 [optional-arguments]: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/named-and-optional-arguments#optional-arguments
+[docfx-core]: https://marymoorstudios.com/_docfx/api/MarymoorStudios.Core.html
+[github-core]: https://github.com/MarymoorStudios/Core
+[license]: https://github.com/MarymoorStudios/Core/blob/main/LICENSE.md

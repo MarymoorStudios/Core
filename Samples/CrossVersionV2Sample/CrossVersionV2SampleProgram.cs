@@ -20,15 +20,18 @@ internal static class CrossVersionV2SampleProgram
   private static async Task<int> Main(string[] args)
   {
     using ILoggerFactory loggingFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
-      // .SetMinimumLevel(LogLevel.Debug)
-     .AddEventSourceLogger()
-     .AddSimpleConsole(options =>
-      {
-        options.ColorBehavior = LoggerColorBehavior.Enabled;
-        options.SingleLine = true;
-        // ReSharper disable once StringLiteralTypo
-        options.TimestampFormat = "[yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffff] ";
-      }));
+       .SetMinimumLevel(LogLevel.Debug)
+        // DEVELOPER NOTE: Try out https://www.nuget.org/packages/MarymoorStudios.Core.Rpc.TraceCli
+       .AddEventSourceLogger()
+      // DEVELOPER NOTE: Uncomment the following lines to see logging in the console window.
+      //.AddSimpleConsole(options =>
+      // {
+      //   options.ColorBehavior = LoggerColorBehavior.Enabled;
+      //   options.SingleLine = true;
+      //   // ReSharper disable once StringLiteralTypo
+      //   options.TimestampFormat = "[yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffffff] ";
+      // })
+    );
 
     RootCommand rootCommand = new("Cross-Version Demo")
     {

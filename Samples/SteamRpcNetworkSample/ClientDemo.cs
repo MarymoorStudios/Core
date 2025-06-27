@@ -35,7 +35,7 @@ internal sealed class ClientDemo
         //
         //   See the csproj file: You MUST provide your own steam_app.txt file for testing!
         //
-        using SteamApi api = await SteamApi.Create(loggerFactory);
+        using SteamApi api = SteamApi.Create(loggerFactory);
         SteamFactoryConfig config = new();
         using MemoryPool<byte> pool = new SlabMemoryPool<byte>(maxMessageSize, chunksPerSlab);
         DemoProxy root = new(new HostDemoServer());

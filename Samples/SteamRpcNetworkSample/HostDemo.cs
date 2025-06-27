@@ -23,7 +23,7 @@ internal sealed class HostDemo
       //   See the csproj file: You MUST provide your own steam_app.txt file for testing!
       //
       using SteamApi api =
-        await SteamApi.CreateGameServer(0x7f000001, 2590, 8889, EServerMode.Authentication, version);
+        SteamApi.CreateGameServer(0x7f000001, 2590, 8889, EServerMode.Authentication, version);
 
       // Log on to an anonymous game server account.
       ISteamGameServer gs = api.Client.GetISteamGameServer();

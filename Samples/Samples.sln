@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromiseRpcIdentitySample", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamRpcNetworkSample", "SteamRpcNetworkSample\SteamRpcNetworkSample.csproj", "{B182CA94-FAB6-A9BA-B410-F129684FBF1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HsmSample", "HsmSample\HsmSample.csproj", "{11617B18-A010-5409-C500-B70CB491BB7D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,8 +70,15 @@ Global
 		{B182CA94-FAB6-A9BA-B410-F129684FBF1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B182CA94-FAB6-A9BA-B410-F129684FBF1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B182CA94-FAB6-A9BA-B410-F129684FBF1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11617B18-A010-5409-C500-B70CB491BB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11617B18-A010-5409-C500-B70CB491BB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11617B18-A010-5409-C500-B70CB491BB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11617B18-A010-5409-C500-B70CB491BB7D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A46F102-563E-48D1-A33A-B2BAD4332D2C}
 	EndGlobalSection
 EndGlobal

@@ -32,6 +32,9 @@ internal static class HsmSampleProgram
       new Blinker4().CreateCommandGroup(),
       new Blinker5().CreateCommandGroup(),
       new Blinker6().CreateCommandGroup(),
+      new Hero().CreateCommandGroup(),
+      new Hero2().CreateCommandGroup(),
+      new LinearWorld().CreateCommandGroup(),
     };
 
     CommandLineBuilder builder = new(rootCommand);

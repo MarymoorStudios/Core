@@ -11,6 +11,7 @@ internal sealed class Blinker5
   [Command]
   public static void Run(CancellationToken cancel)
   {
+    Console.WriteLine("DownArrow to enable maintenance mode, UpArrow to disable");
     TrafficIntersection light = new();
 
     DateTime last = DateTime.Now;
@@ -19,7 +20,7 @@ internal sealed class Blinker5
       // Send keyboard events (if any).
       if (Console.KeyAvailable)
       {
-        ConsoleKeyInfo key = Console.ReadKey();
+        ConsoleKeyInfo key = Console.ReadKey(true);
         if (key.Key is ConsoleKey.UpArrow or ConsoleKey.DownArrow)
         {
           light.MaintenanceMode(key.Key == ConsoleKey.DownArrow);

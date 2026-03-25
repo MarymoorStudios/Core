@@ -14,7 +14,8 @@ internal static class PromiseCommandLineSampleProgram
       new SampleCommands().CreateCommandGroup(),
     };
 
-    return await rootCommand.InvokeAsync(args);
+    ParseResult parseResult = rootCommand.Parse(args);
+    return await parseResult.InvokeAsync();
   }
 }
 

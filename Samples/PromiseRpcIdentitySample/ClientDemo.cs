@@ -13,12 +13,12 @@ internal sealed class ClientDemo
 {
   [Command("Runs a demo client", "run")]
   public static async Promise Run(
-    [Option("The endpoint to connect to", "endpoint")]
-    string endpoint,
-    AdmissionManager? admission,
-    CertificateManager? certMgr,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("The endpoint to connect to", "endpoint")]
+    string endpoint = "",
+    AdmissionManager? admission = default,
+    CertificateManager? certMgr = default,
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))

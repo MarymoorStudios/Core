@@ -15,11 +15,11 @@ internal sealed class ClientDemo
 {
   [Command("Runs a demo client", "run")]
   public static async Promise Run(
-    [Option("The endpoint to connect to", "endpoint")]
-    string endpoint,
-    [Option("Random seed", "seed")] int seed,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("Random seed", "seed")] int seed = 0,
+    [Option("The endpoint to connect to", "endpoint")]
+    string endpoint = "",
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))

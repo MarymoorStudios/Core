@@ -1,9 +1,5 @@
-﻿using MarymoorStudios.Core.Promises.CommandLine;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
+﻿using Microsoft.Extensions.Logging;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Parsing;
 
 namespace PromiseRpcNetworkSample;
 
@@ -11,7 +7,7 @@ internal static class PromiseRpcNetworkSampleProgram
 {
   private static async Task<int> Main(string[] args)
   {
-    using ILoggerFactory loggingFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+    using ILoggerFactory loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
        .SetMinimumLevel(LogLevel.Debug)
         // DEVELOPER NOTE: Try out https://www.nuget.org/packages/MarymoorStudios.Core.Rpc.TraceCli
        .AddEventSourceLogger()
@@ -27,14 +23,11 @@ internal static class PromiseRpcNetworkSampleProgram
 
     RootCommand rootCommand = new("Promise RPC Network Sample")
     {
-      new HostDemo().CreateCommandGroup(),
-      new ClientDemo().CreateCommandGroup(),
+      new HostDemo().CreateCommandGroup(loggerFactory),
+      new ClientDemo().CreateCommandGroup(loggerFactory),
     };
 
-    CommandLineBuilder builder = new(rootCommand);
-    builder.UseDefaults();
-    builder.UseLogging(loggingFactory);
-    Parser parser = builder.Build();
-    return await parser.InvokeAsync(args);
+    ParseResult parseResult = rootCommand.Parse(args);
+    return await parseResult.InvokeAsync();
   }
 }

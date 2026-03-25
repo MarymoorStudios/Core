@@ -12,9 +12,9 @@ internal sealed class HostDemo
 {
   [Command("Runs a demo host", "run")]
   public static async Promise Run(
-    [Option("The endpoint to listen on")] string endpoint,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("The endpoint to listen on")] string endpoint = "",
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))

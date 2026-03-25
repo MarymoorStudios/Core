@@ -5,10 +5,7 @@ using MarymoorStudios.Core.Rpc;
 using MarymoorStudios.Core.Rpc.Exceptions;
 using MarymoorStudios.Core.Rpc.Net;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 using System.CommandLine;
-using System.CommandLine.Builder;
-using System.CommandLine.Parsing;
 using System.Net;
 
 // ReSharper disable once CheckNamespace
@@ -19,7 +16,7 @@ internal static class CrossVersionV2SampleProgram
 {
   private static async Task<int> Main(string[] args)
   {
-    using ILoggerFactory loggingFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+    using ILoggerFactory loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
        .SetMinimumLevel(LogLevel.Debug)
         // DEVELOPER NOTE: Try out https://www.nuget.org/packages/MarymoorStudios.Core.Rpc.TraceCli
        .AddEventSourceLogger()
@@ -35,15 +32,12 @@ internal static class CrossVersionV2SampleProgram
 
     RootCommand rootCommand = new("Cross-Version Demo")
     {
-      new HostCmd().CreateCommandGroup(),
-      new ClientCmd().CreateCommandGroup(),
+      new HostCmd().CreateCommandGroup(loggerFactory),
+      new ClientCmd().CreateCommandGroup(loggerFactory),
     };
 
-    CommandLineBuilder builder = new(rootCommand);
-    builder.UseDefaults();
-    builder.UseLogging(loggingFactory);
-    Parser parser = builder.Build();
-    return await parser.InvokeAsync(args);
+    ParseResult parseResult = rootCommand.Parse(args);
+    return await parseResult.InvokeAsync();
   }
 }
 
@@ -52,10 +46,10 @@ internal sealed class ClientCmd
 {
   [Command("Runs a cross-version client", "run")]
   public static async Promise Run(
-    [Option("The endpoint to connect to", "endpoint")]
-    string endpoint,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("The endpoint to connect to", "endpoint")]
+    string endpoint = "",
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))
@@ -122,9 +116,9 @@ internal sealed class HostCmd
 {
   [Command("Runs a cross-version host", "run")]
   public static async Promise Run(
-    [Option("The endpoint to listen on")] string endpoint,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("The endpoint to listen on")] string endpoint = "",
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))

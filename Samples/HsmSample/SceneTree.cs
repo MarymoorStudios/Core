@@ -121,7 +121,7 @@ internal sealed class SceneTree : IEnumerable<Node>
   {
     if (Console.KeyAvailable)
     {
-      ConsoleKeyInfo key = Console.ReadKey();
+      ConsoleKeyInfo key = Console.ReadKey(true);
       foreach (Node n in m_tree)
       {
         switch (n.HandleInput(key))

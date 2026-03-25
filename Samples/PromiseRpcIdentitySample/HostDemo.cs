@@ -13,11 +13,11 @@ internal sealed class HostDemo
 {
   [Command("Runs a demo host", "run")]
   public static async Promise Run(
-    [Option("The endpoint to listen on")] string endpoint,
-    AdmissionManager? admission,
-    CertificateManager? certMgr,
     ILoggerFactory loggerFactory,
-    CancellationToken cancel
+    [Option("The endpoint to listen on")] string endpoint = "",
+    AdmissionManager? admission = default,
+    CertificateManager? certMgr = default,
+    CancellationToken cancel = default
   )
   {
     if (string.IsNullOrWhiteSpace(endpoint))
